@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <header class="container">
+      <img class="icon" src="assets/images/bird.png">
+      <h1 class="logo">Twittler</h1>
+    </header>
+
+    <section class="container">
+      <nav class="col-1-4">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a>My Profile</a></li>
+          <li><a>Now Viewing</a></li>
+        </ul>
+      </nav><!--Space Remover
+      --><section class="feed col-1-2">
+        <h2 class="feed-header">Your Feed</h2>
+        <section class="feed-stream">
+          <!--Individual tweets generated here-->
+        </section>
+      </section>
+    </section>
+
+    <footer class="container">
+      <h6>Created for Hack Reactor</h6>
+    </footer>
+
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $feed = $('.feed-stream');
+        $feed.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div></div>').addClass('tweet');
+          // var $username = $('<div></div>').addClass('username');
+          // var $time = $('<div></div>').addClass('timestamp');
+          // var $message = $('<div></div>').addClass('message');
+
+          // $username.text(tweet.user);
+          // $message.text(tweet.message);
+          
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          $tweet.appendTo($feed);
           index -= 1;
         }
 
