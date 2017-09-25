@@ -72,7 +72,7 @@ h3 {
 h6 {
   font-size: 12px;
 }
-.button {
+/*.button {
   background: linear-gradient(white, lightgray);
   padding: 15px 30px;
   border-radius: 5px;
@@ -80,7 +80,7 @@ h6 {
   display: inline-block;
   cursor: pointer;
   color: black;
-}
+}*/
 
 /* ========= Header ========== */
 header {
@@ -133,7 +133,7 @@ nav li {
 }
 .feed-header {
   text-align: center;
-  border: 2px black; /* this isn't showing up... why? */
+  display: none;
 }
 .tweet {
   border-radius: 5px;
@@ -150,8 +150,9 @@ nav li {
   display: block;
 }
 .refresh {
-  width: 50%;
-  margin: 0 auto;
+  color: blue;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 /* ========= Footer ========== */
