@@ -1,25 +1,30 @@
 $(document).ready(function(){
 
-  var $feed = $('.feed-stream');
-  $feed.html('');
+  var $feed = $('.feed');
+  var $refresh = $('.refresh'); 
+  var count = streams.home.length;
 
-  var displayTweets = function(context) {
+  function displayTweets(context) {
     
     var stream;
+    var index;
+
+    $feed.html('');
+
     if (context = 'all') {
       stream = streams.home;
     } else {
-      stream = streams.user[context];
+      stream = streams.users[context];
     }
 
-    var index = stream.length - 1;
+    index = stream.length - 1;
 
     for (index; index >= 0; index -= 1){
-      var tweet = streams.home[index];
+      var tweet = stream[index];
       var $tweet = $('<div></div>').addClass('tweet');
 
-      $user = $('<a></a>');
-      $user.attr({'href': '#', 'data-user': tweet.user, 'class': 'username'});
+      $user = $('<a></a>').addClass('username');
+      $user.attr({'href': '#', 'data-user': tweet.user});
       $user.text('@' + tweet.user);
 
       $time = $('<span></span>').addClass('timestamp');
@@ -29,17 +34,50 @@ $(document).ready(function(){
       $message = $('<div></div>').addClass('message');
       $message.text(tweet.message);
 
-      $tweet.append($user, $time, $message);
-      $tweet.appendTo($feed);
+      $tweet.append($user, $time, $message).fadeIn();
+      $tweet.hide().appendTo($feed).fadeIn();
 
     }
-  }
 
-  
+    // $('.username').on('click', function (event) {
+    //   event.preventDefault();
+    //   displayTweets($(this).data('user')); //can't yet filter by username;
+    // });
+  };
 
-  ('.username').on('click', function(event) {
-    event.preventDefault;
-    tweet = streams.home[user][index];
+  // function newTweetsCounter() {
+  //   if (streams.home.length > count) {
+  //     var numNewTweets = streams.home.length - count;
+  //   }
+  // }
+
+  // $refresh.clone().appendTo($feed);
+
+  displayTweets('all');
+
+  $('.refresh').on('click', function (event) {
+    event.preventDefault();
+    $feed.slideDown();
+    displayTweets('all');
   });
 
+
+
 });
+
+//     $('.username').on('click', function(event) {
+//       event.preventDefault();
+//       displayTweets($(this).data('user'));
+//     });
+
+//   }
+
+//   // $refresh.clone().prependTo($feed);
+
+//   displayTweets('all');
+
+//   $('.refresh').on('click', function(event) {
+//     printTweets('all');
+//   });
+
+// });
