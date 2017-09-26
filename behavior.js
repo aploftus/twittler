@@ -4,17 +4,17 @@ $(document).ready(function(){
   var $refresh = $('.refresh'); 
   var count = streams.home.length;
 
-  function displayTweets(context) {
+  function displayTweets(user) {
     
     var stream;
     var index;
 
     $feed.html('');
 
-    if (context = 'all') {
-      stream = streams.home;
+    if (user) {
+      stream = streams.users[user];
     } else {
-      stream = streams.users[context];
+      stream = streams.home;
     }
 
     index = stream.length - 1;
@@ -38,13 +38,16 @@ $(document).ready(function(){
       $tweet.appendTo($feed);
 
       count = streams.home.length;
-
     }
+    $('.current-display').text('Home Feed');
 
-    // $('.username').on('click', function (event) {
-    //   event.preventDefault();
-    //   displayTweets($(this).data('user')); //can't yet filter by username;
-    // });
+    $('.username').on('click', function (event) {
+      event.preventDefault();
+      displayTweets($(this).data('user'));
+      clearInterval(newTweetsTimer);
+      $('.feed-header').slideUp();
+      $('.current-display').text('@' + $(this).data('user') + '\'s Feed');
+    });
   };
 
   var newTweetsTimer;
@@ -58,16 +61,28 @@ $(document).ready(function(){
     }, 3000);
   }
 
-  displayTweets('all');
+  displayTweets();
   newTweetsCounter();
 
-  $refresh.on('click', function (event) {
+  $refresh.on('click', function(event) {
     event.preventDefault();
-    displayTweets('all');
+    displayTweets();
     $('.feed-header').slideUp();
     clearInterval(newTweetsTimer);
     newTweetsCounter();
   });
 
+  $('input').on('keypress', function(event) {
+    if (event.keyCode === 13) {
+      window.visitor = 'visitor';
+      if (!streams.users[window.visitor]) {
+        streams.users[window.visitor] = [];
+      }
+      writeTweet($(this).val());
+      $(this).val('');
+      displayTweets();
+    }
+    
+  });
 
 });

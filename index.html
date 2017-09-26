@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="jquery.js" type="text/javascript"></script>
     <script src="data_generator.js" type="text/javascript"></script>
@@ -9,19 +10,23 @@
   </head>
   <body>
     <header class="container">
-      <img class="icon" src="assets/images/bird.png">
+      <img class="icon" src="assets/images/owl.png">
       <h1 class="logo">Twittler</h1>
     </header>
 
     <section class="container">
       <nav class="col-1-4">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a>My Profile</a></li>
-          <li><a>Now Viewing</a></li>
+          <li><a href="index.html"><h4>Home</h4></a></li>
+          <li>Current Display:
+            <ul class="nested">
+            <li><a class='current-display'>Home Feed</a></li>
+            </ul>
+          </li>
         </ul>
       </nav><!--Space Remover
       --><section class="content col-1-2">
+            <input type="text" name="visitor-tweet" placeholder="Write your message, then press Enter">
             <div class="feed-header">
               <a href="#" class="refresh"></a>
             </div>
