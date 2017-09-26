@@ -105,6 +105,10 @@ header {
   display: inline;
   text-align: center; /* this isn't working... */
 }
+.attribution {
+  font-size: 8px;
+  display: block;
+}
 
 /* ========= Body ========== */
 .col-1-4 {
